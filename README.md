@@ -14,10 +14,11 @@ that causes them to expel one drop of dye from their store (which is always an a
 
 Once the critters have consumed all the points on their leaf, they crawl down the trunk of the tree and jump into a bucket of white
 dye whose volume is the same as the amount of dye that could be collected if each critter completely filled their store (seven drops). 
-Once they're all inside the bucket, they swim around until the dye is distributed throughout the paint and then they march back up the 
-trunk of the tree in order to wipe off the paint. 
+Once they're all inside the bucket, they swim around until the dye is distributed throughout the bucket and then they march back up the 
+trunk of the tree in order to wipe off the dye they were swimming in. 
 
-If I want the tree to be my favorite (#FFFFF), which points of each leaf do I want to have been dusted with absorbent powder?
+If I want the trunk to be as close as possible to my favorite color (#FFFFF), 
+which points of each leaf do I want to have been dusted with absorbent powder?
 
 Every leaf will have the colors of the rainbow distributed across seven points in a clockwise fashion, and the points
 that you designate for dusting with powder will just be skipped.
