@@ -2,12 +2,10 @@ R = 0
 G = 1
 B = 2
 
-
 def from_hex(hex):
 	return int(hex[:2], 16), \
 	       int(hex[2:4], 16), \
 	       int(hex[4:], 16)
-
 
 COLORS = {
 	'RED': from_hex('FF0000'),
@@ -54,6 +52,8 @@ def get_color_for_leaf(leaf, clockwise):
 
 TWIGS_PER_BRANCH = 5.
 MAX_CAPACITY_OF_BUG = 7.
+CLOCKWISE_TWIGS_PER_BRANCH = 4
+COUNTER_CLOCKWISE_TWIGS_PER_BRANCH = 1
 COLOR_IN_BUCKET = (255., 255., 255.)
 VOLUME_IN_BUCKET_PER_BRANCH = TWIGS_PER_BRANCH * MAX_CAPACITY_OF_BUG
 
@@ -76,14 +76,25 @@ LEAF = [
 volume1, clockwise = get_color_for_leaf(LEAF, True)
 volume2, counter_clockwise = get_color_for_leaf(LEAF, False)
 
-VOLUME_OF_COUNTERCLOCKWISE_COLOR_PER_BRANCH = 1 * volume2
-VOLUME_OF_CLOCKWISE_COLOR_PER_BRANCH = (TWIGS_PER_BRANCH - 1) * volume1
+clockwise_volume_per_branch = CLOCKWISE_TWIGS_PER_BRANCH * volume1
+counter_clockwise_volume_per_branch = COUNTER_CLOCKWISE_TWIGS_PER_BRANCH * volume2
+actual_volume_per_branch = clockwise_volume_per_branch + counter_clockwise_volume_per_branch
 
 
-AVERAGE_COLOR_ON_BRANCH = average_colors([(4 * volume1, clockwise), (volume2, counter_clockwise)])
-ACTUAL_VOLUME_PER_BRANCH = VOLUME_OF_COUNTERCLOCKWISE_COLOR_PER_BRANCH + VOLUME_OF_CLOCKWISE_COLOR_PER_BRANCH
+average_color_on_branch = average_colors([
+	(clockwise_volume_per_branch, clockwise),
+	(counter_clockwise_volume_per_branch, counter_clockwise)
+])
 
 
-bucket_color = average_colors([(VOLUME_IN_BUCKET_PER_BRANCH, COLOR_IN_BUCKET), (ACTUAL_VOLUME_PER_BRANCH, AVERAGE_COLOR_ON_BRANCH)])
+bucket_color = average_colors([
+	(VOLUME_IN_BUCKET_PER_BRANCH, COLOR_IN_BUCKET),
+	(actual_volume_per_branch, average_color_on_branch)
+])
 
-print(round(bucket_color[R]), round(bucket_color[G]), round(bucket_color[B]))
+
+print(
+	round(bucket_color[R]),
+	round(bucket_color[G]),
+	round(bucket_color[B])
+)
