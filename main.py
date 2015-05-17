@@ -4,7 +4,9 @@ B = 2
 
 
 def from_hex(hex):
-	return int(hex[:2], 16), int(hex[2:4], 16), int(hex[4:], 16)
+	return int(hex[:2], 16), \
+	       int(hex[2:4], 16), \
+	       int(hex[4:], 16)
 
 
 COLORS = {
@@ -18,17 +20,6 @@ COLORS = {
 }
 
 
-LEAF = [
-	COLORS['RED'],
-	COLORS['ORANGE'],
-	COLORS['YELLOW'],
-	COLORS['GREEN'],
-	COLORS['BLUE'],
-	COLORS['INDIGO'],
-	COLORS['VIOLET'],
-]
-
-
 def average_colors(colors):
 	weighted = []
 	total_weight = 0
@@ -38,8 +29,8 @@ def average_colors(colors):
 
 	zipped = list(zip(*weighted))
 	return int(round(sum(zipped[R]) / total_weight)), \
-		   int(round(sum(zipped[G]) / total_weight)), \
-		   int(round(sum(zipped[B]) / total_weight))
+	       int(round(sum(zipped[G]) / total_weight)), \
+	       int(round(sum(zipped[B]) / total_weight))
 
 
 def get_color_for_leaf(leaf, clockwise):
@@ -50,19 +41,49 @@ def get_color_for_leaf(leaf, clockwise):
 		if c is None:
 			volume = max(volume - 1, 0)
 		else:
+			if not color:
+				color = c
+			else:
+				color = average_colors([(volume, color), (1, c)])
+
 			volume += 1
-			if not color: color = c
-			else: color = average_colors([(volume, color), (1, c)])
 
 	return volume, color
 
 
+
+LEAVES_PER_TWIG = 7
+TWIGS_PER_BRANCH = 5
+MAX_CAPACITY_OF_BUG = 7
+COLOR_IN_BUCKET = (255, 255, 255)
+VOLUME_IN_BUCKET_PER_BRANCH = TWIGS_PER_BRANCH * LEAVES_PER_TWIG * MAX_CAPACITY_OF_BUG
+
+LEAF = [
+	COLORS['RED'],
+	COLORS['ORANGE'],
+	COLORS['YELLOW'],
+	None,
+	None,
+	COLORS['GREEN'],
+	None,
+	None,
+	COLORS['BLUE'],
+	COLORS['INDIGO'],
+	COLORS['VIOLET'],
+]
+
 volume1, clockwise = get_color_for_leaf(LEAF, True)
 volume2, counter_clockwise = get_color_for_leaf(LEAF, False)
 
-final = average_colors([(4*volume1, clockwise), (volume2, counter_clockwise)])
+VOLUME_OF_COUNTERCLOCKWISE_COLOR_PER_BRANCH = LEAVES_PER_TWIG * 1 * volume2
+VOLUME_OF_CLOCKWISE_COLOR_PER_BRANCH = LEAVES_PER_TWIG * (TWIGS_PER_BRANCH - 1) * volume1
 
-print(volume1 * 4, clockwise)
-print(volume2 * 1, counter_clockwise)
 
-print(final)
+AVERAGE_COLOR_ON_BRANCH = average_colors([(4 * volume1, clockwise), (volume2, counter_clockwise)])
+ACTUAL_VOLUME_PER_BRANCH = VOLUME_OF_COUNTERCLOCKWISE_COLOR_PER_BRANCH + VOLUME_OF_CLOCKWISE_COLOR_PER_BRANCH
+
+
+
+bucket_color = average_colors([(VOLUME_IN_BUCKET_PER_BRANCH, COLOR_IN_BUCKET), (ACTUAL_VOLUME_PER_BRANCH, AVERAGE_COLOR_ON_BRANCH)])
+
+print(bucket_color)
