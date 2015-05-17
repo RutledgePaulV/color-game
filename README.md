@@ -20,10 +20,6 @@ dye whose volume is the same as the amount of dye that could be collected if eac
 Once they're all inside the bucket, they swim around until the dye is distributed throughout the bucket and then they march back up the 
 trunk of the tree in order to wipe off the dye they were swimming in, resulting in a beautifully colored tree trunk.
 
-Every leaf will have the colors of the rainbow distributed across seven points in a clockwise fashion 
-(starting with red and following ROY G BIV), and the powder can only exist between points. However, there 
-can be multiple patches of powder (out of the four total) between two points, and each patch consumes one drop.
-
 
 The colors of the rainbow are:
 
@@ -35,15 +31,18 @@ The colors of the rainbow are:
 - I = #8A2BE2
 - V = #C77DF3
 
+Notes:
 
-Assume that dyes of various volumes are averaged by taking a weighted average of their RGB components.
-
-Whenever calculating an average color (for the belly of a creature, or a leaf, or a branch, or a bucket) you should
-round to the nearest integer RGB components.
+- Every leaf will have the colors of the rainbow distributed across seven points in a clockwise fashion 
+(starting with red and following ROY G BIV), and the powder can only exist between points. However, there 
+can be multiple patches of powder (out of the four total) between two points, and each patch consumes one drop.
+- Assume that dyes of various volumes are averaged by taking a weighted average of their RGB components.
+- Don't round anything until the end, and then you should round to integer RGB components
+- Assume all leaves will have the same color / patch order.
 
 If I want the trunk to be as close as possible to my favorite color #DDC7EC, 
-which points of each leaf do I want to have been dusted with absorbent powder?
+which patches of each leaf do I want to have been dusted with absorbent powder?
 
-List out the points in clockwise order indicating where each color is and where each dusted point is.
 
-(e.x: [red, POWDER, POWDER, orange, yellow, green, blue, POWDER, POWDER, indigo, violet])
+List out the points in clockwise order indicating where each color is and where each powder patch is.
+(e.x: [red, POWDER, POWDER, orange, yellow, green, POWDER, blue, POWDER, indigo, violet])
