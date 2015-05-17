@@ -32,16 +32,15 @@ The colors of the rainbow are:
 - V = #C77DF3
 
 Notes:
-
-- Every leaf will have the colors of the rainbow distributed across seven points in a clockwise fashion 
-(starting with red and following ROY G BIV), and the powder can only exist between points. However, there 
-can be multiple patches of powder (out of the four total) between two points, and each patch consumes one drop.
 - Assume that dyes of various volumes are averaged by taking a weighted average of their RGB components.
 - Don't round anything until the end, and then you should round to integer RGB components
 - Assume all leaves will have the same color / patch order.
+- Every leaf will have the colors of the rainbow distributed across seven points in a clockwise fashion 
+(starting with red and following ROY G BIV), and the powder can only exist between points. However, there 
+can be multiple patches of powder (out of the four total) between two points, and each patch consumes one drop.
 
-If I want the trunk to be as close as possible to my favorite color #DDC7EC, 
-which patches of each leaf do I want to have been dusted with absorbent powder?
+
+If I want the trunk to be my favorite color #DDC7EC, which areas of the leaf should I dust with the special powder?
 
 
 List out the points in clockwise order indicating where each color is and where each powder patch is.
